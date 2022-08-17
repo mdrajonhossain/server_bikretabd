@@ -35,6 +35,13 @@ exports.items_client = (req, res, next) => {
 }
 
 
+exports.signle_item_get_client = (req, res, next) => {
+	db.query("SELECT * FROM items WHERE id = '" + req.body.id + "'", function (error, items, fields) {
+		res.json({"items" : items});	
+	})	
+}
+
+
 
 
 

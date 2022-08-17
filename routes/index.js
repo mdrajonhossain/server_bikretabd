@@ -199,6 +199,8 @@ router.post('/sub_cata_sub_id_client', client_app.sub_cat_client);
 
 router.post('/item_client', client_app.items_client);
 
+router.post('/signle_item_get_client', client_app.signle_item_get_client);
+
 //catagory_get end
 
 
