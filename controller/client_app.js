@@ -38,7 +38,16 @@ exports.items_client = (req, res, next) => {
 exports.signle_item_get_client = (req, res, next) => {
 	db.query("SELECT * FROM items WHERE id = '" + req.body.id + "'", function (error, items, fields) {
 		res.json({"items" : items});	
-	})	
+	})
+}
+
+
+exports.search_items = (req, res, next) => {
+
+	db.query('SELECT * FROM items WHERE item_name LIKE "%'+req.body.items_name+'%"', function (error, results, fields) {
+		res.json({"items" : results});	
+	})
+ 
 }
 
 
