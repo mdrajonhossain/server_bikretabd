@@ -246,6 +246,11 @@ router.post('/signle_item_get_client', client_app.signle_item_get_client);
 
 router.post('/search_items', client_app.search_items);
 
+
+// client registration and login
+router.post('/client_regi', client_app.client_regi);
+router.post('/client_login', client_app.client_login);
+
 //catagory_get end
 
 
