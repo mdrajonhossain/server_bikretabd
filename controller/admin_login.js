@@ -424,7 +424,19 @@ var slider = multer.diskStorage({
         cb(null, Date.now() + '.jpg')
     }
 })
-var upload_slider = multer({ storage: slider}).single("img_file");
+var upload_slider = multer({ 
+	storage: slider,
+	fileFilter: (req, file, cb) => {
+       if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+      	cb(null, true);
+    }else{
+      cb(null, false);
+      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+    }
+  }
+
+}).single("img_file");
+
 
 exports.add_slider = (req, res, next) => { 
  
