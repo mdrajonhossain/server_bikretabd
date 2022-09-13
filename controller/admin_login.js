@@ -405,9 +405,7 @@ exports.add_slider_route = (req, res, next) => {
 }
 
 
-
-exports.manage_slider_route = (req, res, next) => {
-	
+exports.manage_slider_route = (req, res, next) => {	
 		res.render('admin/manage_slider', {
 			setting_header: req.session.header,
 			body_color: req.session.body_color,
@@ -416,7 +414,6 @@ exports.manage_slider_route = (req, res, next) => {
 		});
 }
 // start slider end
-
 
 
 
@@ -442,6 +439,5 @@ exports.add_slider = (req, res, next) => {
         		}
         	}
     })
-
 }
 
