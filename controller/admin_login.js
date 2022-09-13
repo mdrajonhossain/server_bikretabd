@@ -105,7 +105,6 @@ exports.loginsystem = (req, res, next) => {
 
 	} else if (panel_name === "delivery") {
 
-
 		if (username != '' && password != '') {
 			db.query('SELECT * FROM delivery WHERE username = ?', [username], function (error, results, fields) {
 				
@@ -128,9 +127,6 @@ exports.loginsystem = (req, res, next) => {
 		} else {
 			res.redirect('/admin');
 		}
-
-
-
 	} else {
 		res.redirect('/admin');
 	}
@@ -141,9 +137,7 @@ exports.loginsystem = (req, res, next) => {
 
 
 // start catagory
-
-exports.add_cat = (req, res, next) => {
-	
+exports.add_cat = (req, res, next) => {	
 
 	db.query('select * from admin_add_form_setting', function (error, form_setting, fields) {
 		res.render('admin/add_catagory', {
@@ -155,6 +149,8 @@ exports.add_cat = (req, res, next) => {
 		});
 	});
 }
+
+
 
 exports.insertcat = (req, res, next) => {
 	console.log(159, req.body);
@@ -170,7 +166,6 @@ exports.insertcat = (req, res, next) => {
 
 	res.redirect('/admin/add_catagory');
 }
-
 
 
 
@@ -291,16 +286,14 @@ exports.insertitems = (req, res, next) => {
 	const status = req.body.status;
 	const link = req.body.link;
 
-
-
 	var add_items = "INSERT INTO items(item_name, sub_cat_id, brand_id, slug, details, fontimg, backimg, discount_price, regular_price, stock, status, link) VALUES('" + item_name + "','" + sub_cat_id + "','" + brand_id + "','" + slug + "','" + details + "','" + fontimg + "','" + backimg + "','" + discount_price + "','" + regular_price + "','" + stock + "','" + status + "','" + link + "')";
 	db.query(add_items);
 	res.redirect('/admin/add_item');
 }
 
+
+
 exports.add_item = (req, res, next) => {
-
-
 	
 	db.query('select * from subcategories', function (error, sub_cata, fields) {
 		db.query('select * from brands', function (error, brand, fields) {
@@ -320,6 +313,8 @@ exports.add_item = (req, res, next) => {
 	})
 }
 
+
+
 exports.manage_item = (req, res, next) => {
 
 	db.query('select * from items', function (error, itemsdata, fields) {
@@ -333,6 +328,7 @@ exports.manage_item = (req, res, next) => {
 	})
 }
 // End Items
+
 
 
 exports.itemsdelete = (req, res, next) => {
@@ -397,6 +393,7 @@ exports.manage_brand = (req, res, next) => {
 
 
 
+
 var slider = multer.diskStorage({
     destination: './public/slider',
     filename: function (req, file, cb) {
@@ -405,21 +402,19 @@ var slider = multer.diskStorage({
 })
 var upload_slider = multer({ storage: slider}).single("img_file");
 
-
 exports.add_slider = (req, res, next) => { 
  
   upload_slider(req,res, function(err) {	  	
         	if(err) {             
 	 			res.json({ error_message : "techincale error" });
         	}else {  
-        		if(!req.file || !req.body.name){
+        		if(!req.file || !req.body.name || !req.body.age){
         			res.json({ error_message : "file upload error" });
         		}else{
-	 				res.json({ message : "Successfully" });
+	 				res.json({ status: true, message : "Successfully", Is_file:req.file, data: req.body });
         		}
         	}
-    })	  
-
+    })
 
 }
 
