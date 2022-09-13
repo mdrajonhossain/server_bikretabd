@@ -182,6 +182,10 @@ router.post('/brand_add_data', branddirection.single('brand_img'), admin_login.i
 router.get('/manage_brand', auth_middleware, admin_login.manage_brand);
 //end brand
 
+//start hompe slider 
+router.post('/add_slider', admin_login.add_slider);
+//End hompe slider 
+
 
 
 

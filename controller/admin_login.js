@@ -395,3 +395,31 @@ exports.manage_brand = (req, res, next) => {
 // end brand
 
 
+
+
+var slider = multer.diskStorage({
+    destination: './public/slider',
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '.jpg')
+    }
+})
+var upload_slider = multer({ storage: slider}).single("img_file");
+
+
+exports.add_slider = (req, res, next) => { 
+ 
+  upload_slider(req,res, function(err) {	  	
+        	if(err) {             
+	 			res.json({ error_message : "techincale error" });
+        	}else {  
+        		if(!req.file || !req.body.name){
+        			res.json({ error_message : "file upload error" });
+        		}else{
+	 				res.json({ message : "Successfully" });
+        		}
+        	}
+    })	  
+
+
+}
+
