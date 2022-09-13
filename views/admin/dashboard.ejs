@@ -25,13 +25,13 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h3 class="p-3 mt-4 text-white" <div class="card text-white mb-4"
+                            <h3 class="p-3 mt-4 text-white text-white mb-4"
                                 style="background-color:<%= body_color ?  body_color : 'black' %>">Short Details
                             </h3>
 
                             <% if(messages !=0){ %>
-                                <div class="alert text-success py-3 col-md-12 bg-light" role="alert">
-                                    <%= messages %>
+                                <div onclick="refresh()" class="alert text-success py-3 col-md-12 bg-light" role="alert">
+                                    <span style="cursor: pointer"><%= messages %></span>
                                 </div>
                                 <% } %>
                                     <div class="row">
@@ -183,7 +183,11 @@
             }
         </style>
 
-        
+        <script>
+            function refresh(){
+                location.reload();
+            }
+        </script>
 
 
 

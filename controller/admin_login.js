@@ -419,7 +419,7 @@ exports.manage_slider_route = (req, res, next) => {
 
 
 var slider = multer.diskStorage({
-    destination: './public/slider',
+    destination: './public/slider',    
     filename: function (req, file, cb) {
         cb(null, Date.now() + '.jpg')
     }
@@ -430,10 +430,10 @@ exports.add_slider = (req, res, next) => {
  
   upload_slider(req,res, function(err) {	  	
         	if(err) {             
-	 			res.json({ error_message : "techincale error" });
+	 			res.json({ status: false, error_message : "techincale error" });
         	}else {  
         		if(!req.file || !req.body.name || !req.body.age){
-        			res.json({ error_message : "file upload error" });
+        			res.json({ status: false, error_message : "file upload error" });
         		}else{
 	 				res.json({ status: true, message : "Successfully", Is_file:req.file, data: req.body });
         		}
