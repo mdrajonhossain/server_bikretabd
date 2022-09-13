@@ -177,12 +177,14 @@ router.get('/manage_item', auth_middleware, admin_login.manage_item);
 router.get('/add_brand', auth_middleware, admin_login.add_brand);
 router.use('/brandapifile', express.static('./public/brand_image_path'));
 router.post('/brand_add_data', branddirection.single('brand_img'), admin_login.insertbrand);
-
-
 router.get('/manage_brand', auth_middleware, admin_login.manage_brand);
+
 //end brand
 
 //start hompe slider 
+router.get('/add_slider_route', auth_middleware, admin_login.add_slider_route);
+router.get('/manage_slider_route', auth_middleware, admin_login.manage_slider_route);
+
 router.post('/add_slider', admin_login.add_slider);
 //End hompe slider 
 

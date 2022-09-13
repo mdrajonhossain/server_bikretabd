@@ -105,6 +105,7 @@ exports.loginsystem = (req, res, next) => {
 
 	} else if (panel_name === "delivery") {
 
+
 		if (username != '' && password != '') {
 			db.query('SELECT * FROM delivery WHERE username = ?', [username], function (error, results, fields) {
 				
@@ -389,6 +390,32 @@ exports.manage_brand = (req, res, next) => {
 	})
 }
 // end brand
+
+
+
+// start slider start
+exports.add_slider_route = (req, res, next) => {
+	
+		res.render('admin/add_slider', {
+			setting_header: req.session.header,
+			body_color: req.session.body_color,
+			displayname: req.session.displayname,
+			bas_url : process.env.base_url
+		});
+}
+
+
+
+exports.manage_slider_route = (req, res, next) => {
+	
+		res.render('admin/manage_slider', {
+			setting_header: req.session.header,
+			body_color: req.session.body_color,
+			displayname: req.session.displayname,
+			bas_url : process.env.base_url
+		});
+}
+// start slider end
 
 
 
