@@ -427,7 +427,10 @@ var slider = multer.diskStorage({
 var upload_slider = multer({ 
 	storage: slider,
 	fileFilter: (req, file, cb) => {
-       if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+		if(req.body.name != '' || req.body.age != ''){
+			console.log("sadfasdfsfd")
+		}
+       if(file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
       	cb(null, true);
     }else{
       cb(null, false);
