@@ -427,10 +427,7 @@ var slider = multer.diskStorage({
 var upload_slider = multer({ 
 	storage: slider,
 	fileFilter: (req, file, cb) => {
-		if(req.body.name != '' || req.body.age != ''){
-			console.log("sadfasdfsfd")
-		}
-       if(file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+       if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
       	cb(null, true);
     }else{
       cb(null, false);
@@ -449,6 +446,9 @@ exports.add_slider = (req, res, next) => {
         	}else {  
         		if(!req.file || !req.body.name || !req.body.age){
         			res.json({ status: false, error_message : "file upload error" });
+        			if(req.file){
+        				fs.unlink('./public/slider/' + req.file.filename);        				
+        			}
         		}else{
 	 				res.json({ status: true, message : "Successfully", Is_file:req.file, data: req.body });
         		}
