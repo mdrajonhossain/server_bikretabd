@@ -445,10 +445,10 @@ exports.add_slider = (req, res, next) => {
 	 			res.json({ status: false, error_message : "techincale error" });
         	}else {  
         		if(!req.body.name || !req.body.age){
-        			res.json({ status: false, error_message : "file upload error" });
         			if(req.file){
         				fs.unlink('./public/slider/' + req.file.filename);        				
         			}
+        			res.json({ status: false, error_message : "file upload error" });
         		}else{
 	 				res.json({ status: true, message : "Successfully", Is_file:req.file, data: req.body });
         		}
