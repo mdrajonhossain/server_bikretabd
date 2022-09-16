@@ -133,7 +133,11 @@ exports.client_login = (req, res, next) => {
 	}
 }
 
-
+exports.slider_get_client = (req, res, next) => {
+	db.query('select * from slider', function (error, slider_data, fields) {
+		res.json({ slider_data });
+	});
+}
 
 
 

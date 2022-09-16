@@ -242,6 +242,8 @@ router.get('/manage_items_order', auth_middleware,admin_setting.manage_items_ord
 //catagory_get start
 router.get('/cata_get_client', client_app.cata_get_client);
 
+router.get('/slider_get_client', client_app.slider_get_client);
+
 router.get('/subcat_getclient', client_app.subcatclient_get);
 
 router.post('/sub_cata_sub_id_client', client_app.sub_cat_client);
