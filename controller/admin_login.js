@@ -401,6 +401,7 @@ exports.add_slider_route = (req, res, next) => {
 			body_color: req.session.body_color,
 			displayname: req.session.displayname,
 			bas_url : process.env.base_url
+			messages: req.flash('slider_success'),
 		});
 }
 
@@ -435,7 +436,7 @@ var upload_slider = multer({
     }
   }
 
-}).single("img_file");
+}).single("slider_img");
 
 
 exports.add_slider = (req, res, next) => { 
@@ -444,13 +445,24 @@ exports.add_slider = (req, res, next) => {
         	if(err) {             
 	 			res.json({ status: false, error_message : "techincale error" });
         	}else {  
-        		if(!req.body.name || !req.body.age){
+        		if(!req.body.sub_catagory){
         			if(req.file){
+        				console.log(req.file.filename);
         				fs.unlink('./public/slider/' + req.file.filename);        				
         			}
         			res.json({ status: false, error_message : "file upload error" });
         		}else{
-	 				res.json({ status: true, message : "Successfully", Is_file:req.file, data: req.body });
+        			var add_slider = "INSERT INTO slider(slider_image, sub_catagory)VALUES('" + req.file.filename + "','" + req.body.sub_catagory + "')"
+					db.query(add_slider);
+
+					req.flash('slider_success', 'Slider Insert Successfully!')
+					res.redirect('/admin/dashboard');
+	 				res.json(
+	 					{ status: true,
+	 						message : "Successfully",
+	 						Is_file:req.file, 
+	 						data: req.body
+	 					});
         		}
         	}
     })
