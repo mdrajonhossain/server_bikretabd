@@ -33,18 +33,22 @@
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
-                                                <th>Catagory Image</th>
-                                                <th>Catagory Type</th>
+                                                <th>Catagory Image</th>                         
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Catagory Image</th>
-                                                <th>Catagory Type</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot>                                        
+                                          <tbody>
+                                            <% slider.forEach((data)=> { %>
+                                                <tr>
+                                                    <td>    
+                                                        <img src="/slider/<%= data.slider_image %>" alt="Girl in a jacket" width="50" height="60">
+                                                    </td> 
+                                                    <td> 
+                                                        <a class="btn btn-danger">Delete</a>
+                                                    </td> 
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>                                      
                                     </table>
                                 </div>
                             </div>

@@ -395,24 +395,29 @@ exports.manage_brand = (req, res, next) => {
 
 // start slider start
 exports.add_slider_route = (req, res, next) => {
-	
+
+	db.query('select * from subcategories', function (error, subcategories, fields) {
 		res.render('admin/add_slider', {
 			setting_header: req.session.header,
 			body_color: req.session.body_color,
 			displayname: req.session.displayname,
-			bas_url : process.env.base_url
-			messages: req.flash('slider_success'),
+			bas_url : process.env.base_url,
+			subcategories:subcategories		
 		});
+	})
 }
 
 
 exports.manage_slider_route = (req, res, next) => {	
+	db.query('select * from slider', function (error, slider, fields) {
 		res.render('admin/manage_slider', {
 			setting_header: req.session.header,
 			body_color: req.session.body_color,
 			displayname: req.session.displayname,
-			bas_url : process.env.base_url
+			bas_url : process.env.base_url,
+			slider:slider
 		});
+	});
 }
 // start slider end
 
@@ -443,26 +448,20 @@ exports.add_slider = (req, res, next) => {
  
   upload_slider(req,res, function(err) {	  	
         	if(err) {             
-	 			res.json({ status: false, error_message : "techincale error" });
+	 			// res.json({ status: false, error_message : "techincale error" });
+	 			res.redirect('/admin/add_slider_route');
         	}else {  
         		if(!req.body.sub_catagory){
         			if(req.file){
         				console.log(req.file.filename);
         				fs.unlink('./public/slider/' + req.file.filename);        				
         			}
-        			res.json({ status: false, error_message : "file upload error" });
+        			// res.json({ status: false, error_message : "file upload error" });
+        			res.redirect('/admin/add_slider_route');
         		}else{
         			var add_slider = "INSERT INTO slider(slider_image, sub_catagory)VALUES('" + req.file.filename + "','" + req.body.sub_catagory + "')"
-					db.query(add_slider);
-
-					req.flash('slider_success', 'Slider Insert Successfully!')
-					res.redirect('/admin/dashboard');
-	 				res.json(
-	 					{ status: true,
-	 						message : "Successfully",
-	 						Is_file:req.file, 
-	 						data: req.body
-	 					});
+					db.query(add_slider);					
+	 				res.redirect('/admin/add_slider_route');
         		}
         	}
     })
